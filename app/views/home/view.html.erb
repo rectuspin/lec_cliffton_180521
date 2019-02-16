@@ -1,0 +1,26 @@
+<p>view</p>
+
+
+
+제목: <%=@post.title%><br>
+내용: <%=@post.content%><br>
+ <a href='/home/edit/<%=@post.id%>'>수정</a>
+ <a href='/home/destroy/<%=@post.id%>'>삭제</a>
+ <br>-----------------------<br>
+ 
+
+ <% @post.comments.each do |x| %>
+     <%= x.content %>
+     <a href='/home/<%=@post.id%>/comments/<%=x.id%>/edit'>댓글수정</a>
+     <a href='/home/<%=@post.id%>/comments/<%=x.id%>/destroy'>댓글삭제</a>
+     <br>
+ <%end%>
+
+<form action ='/home/<%=@post.id%>/comments/create' method ='post'>
+    <%=hidden_field_tag :authenticity_token, form_authenticity_token%>
+    내용: <textarea name = 'content'></textarea><br>
+    <input type='submit' value='댓글쓰기'>
+</form>
+--------------------------------------------------------<br>
+ <br>
+ <a href='/home/index'>돌아가기</a>
